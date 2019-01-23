@@ -4,7 +4,7 @@ import '../../Main.scss';
 
 const CardContainer = (props) => {
   return(
-    <div>CardContainer
+    <div className='card-container'>CardContainer
 
       <Card />
     </div>

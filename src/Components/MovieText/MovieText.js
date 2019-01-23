@@ -3,9 +3,9 @@ import '../../Main.scss';
 
 const MovieText = (props) => {
   return(
-    <div>
+    <aside>
       Movie Text Here
-    </div>
+    </aside>
   )
 }
 

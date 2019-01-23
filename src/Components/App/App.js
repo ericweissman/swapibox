@@ -15,9 +15,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <MovieText />
-        <Controls />
-        <CardContainer />
+        <header>
+          <Controls />
+        </header>
+        <main>
+          <MovieText />
+          <CardContainer />
+        </main>
       </div>
     );
   }

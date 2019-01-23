@@ -4,7 +4,9 @@ import '../../Main.scss';
 class Card extends Component {
   render() {
     return(
-      <div>CARD</div>
+      <div className='card'>
+        CARD
+      </div>
     )
   }
 }
