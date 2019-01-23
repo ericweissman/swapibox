@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import '../../Main.scss';
-import MovieText from '../MovieText/MovieText'
+import MovieText from '../MovieText/MovieText';
+import Controls from '../Controls/Controls';
+import CardContainer from '../CardContainer/CardContainer';
 
 
 class App extends Component {
@@ -14,6 +16,8 @@ class App extends Component {
     return (
       <div className="App">
         <MovieText />
+        <Controls />
+        <CardContainer />
       </div>
     );
   }
