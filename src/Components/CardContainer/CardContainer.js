@@ -1,8 +1,13 @@
 import React from 'react';
+import Card from '../Card/Card'
+import '../../Main.scss';
 
 const CardContainer = (props) => {
   return(
-    <div>CardContainer</div>
+    <div>CardContainer
+
+      <Card />
+    </div>
   )
 }
 
