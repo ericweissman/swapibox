@@ -17,43 +17,47 @@ class App extends Component {
 
 //PlANET FETCHES
 fetchPlanetData = async () => {
-  let planets = [];
+  let allPlanets = [];
   for (let i = 1; i <= 7; i++) {
     const url = `https://swapi.co/api/planets/?page=${i}`;
     const response = await fetch(url);
     const result = await response.json();
-    planets.push(...result.results)
+    allPlanets.push(...result.results)
   }
-  this.setState({ planets })
+  const planets = await this.fetchResidents(allPlanets)
+  this.setState({ planets: planets })
 }
 
 fetchResidents = (planets) => {
-  const unresolvedPromises = planets.map( async (planet) => {
+  const unresolvedPromises = planets.map( async planet => {
     if (planet.residents.length > 0) {
-      planet.residents.map( async (resident) =>{
-        const residents = [];
-        const response = await fetch(resident);
-        const residentData = await response.json();
-        residents.push(residentData);
-        return ({
-          name: planet.name,
-          terrain: planet.terrain,
-          population: planet.population,
-          climate: planet.climate,
-          residents: residents})
-      })
-    } else {
-      return({
+     let residentNames = [];
+     for (let i = 0; i < planet.residents.length; i++) {
+       console.log('fire')
+       const response = await fetch(planet.residents[i]);
+       const result = await response.json();
+       residentNames.push(result.name)
+     }
+      return ({
         name: planet.name,
         terrain: planet.terrain,
         population: planet.population,
         climate: planet.climate,
-        residents: []
+        residents: residentNames
+      })
+    } else {
+      return ({
+        name: planet.name,
+        terrain: planet.terrain,
+        population: planet.population,
+        climate: planet.climate,
+        residents: 'none'
       })
     }
   })
   return Promise.all(unresolvedPromises)
 }
+
 
 //PEOPLE FETCHES
 fetchPeopleData = async () => {
