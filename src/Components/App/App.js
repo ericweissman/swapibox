@@ -9,7 +9,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      films: [],
+      films: {},
       people: [],
     }
   }
@@ -65,25 +65,31 @@ fetchHomeworlds = (people) => {
 }
 
 //MOVIE FETCH
-fetchFilms = async () => {
-  let films = [];
+fetchCrawl = async () => {
+  // let films = [];
+  let index =  Math.floor(Math.random() * 6 + 1)
   const url = 'https://swapi.co/api/films/';
   const response = await fetch(url);
   const result = await response.json();
-  const filmData = await result.results;
+  const filmData = await result.results[index];
 
-  filmData.forEach((film) => {
-    films.push(film.opening_crawl)
-  })
-
-  this.setState({films})
+  // films.push({
+  //   title: filmData.title,
+  //   crawl: filmData.opening_crawl,
+  //   year: filmData.release_date
+  // });
+  this.setState({
+    films: {
+      title: filmData.title,
+      crawl: filmData.opening_crawl,
+      year: filmData.release_date
+    }});
 }
-
 
 
 componentDidMount = () =>  {
    this.fetchPeopleData();
-   this.fetchFilms();
+   this.fetchCrawl();
   }
 
   render() {
@@ -93,7 +99,7 @@ componentDidMount = () =>  {
           <Controls />
         </header>
         <main>
-          <MovieText />
+          <MovieText films={this.state.films} />
           <CardContainer />
         </main>
       </div>
