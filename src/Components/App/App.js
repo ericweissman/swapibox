@@ -13,45 +13,59 @@ class App extends Component {
     }
   }
 
-fetchPeopleData() {
-  fetch('https://swapi.co/api/people/?page=1')
-    .then(response => response.json())
-    .then(people => this.fetchHomeworlds(people.results))
-    .then(peopleWithHomes => this.fetchSpecies(peopleWithHomes))
-    .then(result => console.log(result))
+//PEOPLE FETCHES
+fetchPeopleData = async () => {
+  let allPeople = [];
+  for (let i = 1; i < 10; i++) {
+      const url = `https://swapi.co/api/people/?page=${i}`
+      const response = await fetch(url);
+      const result = await response.json();
+      allPeople.push(...result.results)
+    }
+    console.log(allPeople)
+    const withHome = await this.fetchHomeworlds(allPeople);
+    const withSpecies = await this.fetchSpecies(withHome);
+    this.setState({people: withSpecies})
   }
 
 fetchSpecies(people) {
-  const unresolvedPromises = people.map((person) => {
-    return fetch(person.species)
-      .then(response => response.json())
-      .then(speciesData => ({
-        ...person,
-        species: speciesData.name
-      }))
+  const unresolvedPromises = people.map( async (person) => {
+    if (person.species.length > 0) {
+      const response =  await fetch(person.species[0]);
+      const speciesData = await response.json();
+      return ({
+          name: person.name,
+          homeworld: person.homeworld,
+          population: person.population,
+          species: speciesData.name
+        })
+    } else {
+      return({
+        name: person.name,
+        homeworld: person.homeworld,
+        population: person.population,
+        species: 'unknown'
+      })
+    }
   })
-
   return Promise.all(unresolvedPromises)
 }
 
-fetchHomeworlds(people) {
-  const unresolvedPromises = people.map((person) => {
-    return fetch(person.homeworld)
-      .then(response => response.json())
-      .then(homeworldData => ({ 
+fetchHomeworlds = (people) => {
+  const unresolvedPromises = people.map( async (person) => {
+      const response = await fetch(person.homeworld);
+      const homeworldData = await response.json();
+      return ({ 
         ...person, 
         homeworld: homeworldData.name,
         population: homeworldData.population,
-      }))
+      })
   })
-
   return Promise.all(unresolvedPromises)
 }
 
-
-
-  async componentDidMount() {
-    this.fetchPeopleData();
+componentDidMount = () =>  {
+   this.fetchPeopleData();
   }
 
   render() {
