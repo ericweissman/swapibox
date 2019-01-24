@@ -9,6 +9,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      films: [],
       people: [],
     }
   }
@@ -27,7 +28,7 @@ fetchPeopleData = async () => {
     this.setState({ people })
   }
 
-fetchSpecies(people) {
+fetchSpecies = (people) => {
   const unresolvedPromises = people.map( async (person) => {
     if (person.species.length > 0) {
       const response =  await fetch(person.species[0]);
@@ -63,8 +64,26 @@ fetchHomeworlds = (people) => {
   return Promise.all(unresolvedPromises)
 }
 
+//MOVIE FETCH
+fetchFilms = async () => {
+  let films = [];
+  const url = 'https://swapi.co/api/films/';
+  const response = await fetch(url);
+  const result = await response.json();
+  const filmData = await result.results;
+
+  filmData.forEach((film) => {
+    films.push(film.opening_crawl)
+  })
+
+  this.setState({films})
+}
+
+
+
 componentDidMount = () =>  {
    this.fetchPeopleData();
+   this.fetchFilms();
   }
 
   render() {
