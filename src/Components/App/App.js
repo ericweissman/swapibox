@@ -22,10 +22,9 @@ fetchPeopleData = async () => {
       const result = await response.json();
       allPeople.push(...result.results)
     }
-    console.log(allPeople)
     const withHome = await this.fetchHomeworlds(allPeople);
-    const withSpecies = await this.fetchSpecies(withHome);
-    this.setState({people: withSpecies})
+    const people = await this.fetchSpecies(withHome);
+    this.setState({ people })
   }
 
 fetchSpecies(people) {
