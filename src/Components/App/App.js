@@ -11,8 +11,49 @@ class App extends Component {
     this.state = {
       films: {},
       people: [],
+      planets: []
     }
   }
+
+//PlANET FETCHES
+fetchPlanetData = async () => {
+  let planets = [];
+  for (let i = 1; i <= 7; i++) {
+    const url = `https://swapi.co/api/planets/?page=${i}`;
+    const response = await fetch(url);
+    const result = await response.json();
+    planets.push(...result.results)
+  }
+  this.setState({ planets })
+}
+
+fetchResidents = (planets) => {
+  const unresolvedPromises = planets.map( async (planet) => {
+    if (planet.residents.length > 0) {
+      planet.residents.map( async (resident) =>{
+        const residents = [];
+        const response = await fetch(resident);
+        const residentData = await response.json();
+        residents.push(residentData);
+        return ({
+          name: planet.name,
+          terrain: planet.terrain,
+          population: planet.population,
+          climate: planet.climate,
+          residents: residents})
+      })
+    } else {
+      return({
+        name: planet.name,
+        terrain: planet.terrain,
+        population: planet.population,
+        climate: planet.climate,
+        residents: []
+      })
+    }
+  })
+  return Promise.all(unresolvedPromises)
+}
 
 //PEOPLE FETCHES
 fetchPeopleData = async () => {
@@ -66,18 +107,12 @@ fetchHomeworlds = (people) => {
 
 //MOVIE FETCH
 fetchCrawl = async () => {
-  // let films = [];
   let index =  Math.floor(Math.random() * 6 + 1)
   const url = 'https://swapi.co/api/films/';
   const response = await fetch(url);
   const result = await response.json();
   const filmData = await result.results[index];
 
-  // films.push({
-  //   title: filmData.title,
-  //   crawl: filmData.opening_crawl,
-  //   year: filmData.release_date
-  // });
   this.setState({
     films: {
       title: filmData.title,
@@ -88,9 +123,10 @@ fetchCrawl = async () => {
 
 
 componentDidMount = () =>  {
-   this.fetchPeopleData();
-   this.fetchCrawl();
-  }
+  // this.fetchPeopleData();
+  // this.fetchCrawl();
+  this.fetchPlanetData();
+}
 
   render() {
     return (
