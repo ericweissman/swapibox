@@ -129,7 +129,7 @@ fetchCrawl = async () => {
 componentDidMount = () =>  {
   this.fetchPeopleData();
   this.fetchCrawl();
-  // this.fetchPlanetData();
+  this.fetchPlanetData();
 }
 
   render() {
