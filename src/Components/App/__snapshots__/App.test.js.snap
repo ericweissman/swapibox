@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App should match snapshot 1`] = `
+<div
+  className="App"
+>
+  <header>
+    <Controls />
+  </header>
+  <main>
+    <MovieText
+      films={Object {}}
+    />
+    <CardContainer
+      active="planets"
+      category={
+        Object {
+          "active": "planets",
+          "films": Object {},
+          "people": Array [],
+          "planets": Array [],
+          "vehicles": Array [],
+        }
+      }
+    />
+  </main>
+</div>
+`;

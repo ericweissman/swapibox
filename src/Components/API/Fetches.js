@@ -1,9 +1,8 @@
-export const fetchPeople = async () => {
-  const response = await fetch('https://swapi.co/api/people/');
+export const fetchData = async (url) => {
+  const response = await fetch(url);
   if (response.ok) {
     return response.json();
   } else {
     throw Error(`Error fetching, ${response.status}`)
   }
 }
-

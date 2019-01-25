@@ -1,8 +1,8 @@
-import {fetchPeople} from './Fetches'
+import {fetchData} from './Fetches'
 
 
 describe('API', () => {
-  describe('fetchPeople', () => {
+  describe('fetchData', () => {
 
     beforeEach(() => {
       window.fetch = jest.fn()
@@ -13,7 +13,7 @@ describe('API', () => {
       const expected = 'https://swapi.co/api/people/';
 
       //execution
-      fetchPeople();
+      fetchData(expected);
 
       //expectation
       expect(window.fetch).toHaveBeenCalledWith(expected)
