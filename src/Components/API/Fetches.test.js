@@ -8,7 +8,7 @@ describe('API', () => {
     beforeEach(() => {
       window.fetch = jest.fn()
        mockURL = 'https://swapi.co/api/people/';
-       mockData = 
+       mockData = [{}, {}]
     })
 
     it('should call fetch with the correct params', () => {
@@ -23,8 +23,16 @@ describe('API', () => {
     })
   })
 
-  it('should return correct data if everything is OK,' async () => {
-    //setup
+  it('should return correct data if everything is OK', async () => {
+    //setup 
+    window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+      ok: true,
+      json: () => Promise.resolve(mockData)
+    }))
+    //execution and expectation
+    const results = await fetchData(mockURL)
+    expect(results).toEqual(mockData)
+
 
   })
 
