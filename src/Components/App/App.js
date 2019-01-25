@@ -15,10 +15,15 @@ class App extends Component {
       people: [],
       planets: [],
       vehicles: [],
-      active: 'people',
+      active: '',
       errorStatus: ''
     }
   }
+
+//Change active
+updateActive = (category) => {
+  this.setState({ active: category})
+}
 
 //PlANET FETCHES
 addPlanets = async () => {
@@ -99,7 +104,7 @@ componentDidMount = () =>  {
     return (
       <div className="App">
         <header>
-          <Controls />
+          <Controls updateActive={this.updateActive}/>
         </header>
         <main>
           <MovieText films={films}/>

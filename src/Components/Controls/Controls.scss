@@ -1,4 +1,4 @@
-form {
+nav {
   h1 {
     padding-right: 100px;
   }
@@ -7,4 +7,11 @@ form {
   align-items: center;
   color: $accent;
   font-family: $title-font;
+
+  button {
+    cursor: pointer;
+    &:hover {
+      background-color: $accent;
+    }
+  }
 }
