@@ -12,10 +12,11 @@ exports[`App should match snapshot 1`] = `
       films={Object {}}
     />
     <CardContainer
-      active="planets"
+      active="people"
       category={
         Object {
-          "active": "planets",
+          "active": "people",
+          "errorStatus": "",
           "films": Object {},
           "people": Array [],
           "planets": Array [],

@@ -3,12 +3,16 @@ import { fetchData } from "../API/Fetches";
 //PEOPLE HELPERS
 export const addHomeworlds = (people) => {
   const unresolvedPromises = people.map( async (person) =>{
-    const homeworldData = await fetchData(person.homeworld);
+    try {
+      const homeworldData = await fetchData(person.homeworld);
       return ({
         ...person,
         homeworld: homeworldData.name,
         population: homeworldData.population
       })
+    } catch (error){
+      throw Error(error)
+    }
   })
   return Promise.all(unresolvedPromises)
 }

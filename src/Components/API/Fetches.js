@@ -6,3 +6,5 @@ export const fetchData = async (url) => {
     throw Error(`Error fetching, ${response.status}`)
   }
 }
+
+

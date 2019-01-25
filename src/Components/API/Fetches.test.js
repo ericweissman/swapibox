@@ -2,14 +2,18 @@ import {fetchData} from './Fetches'
 
 
 describe('API', () => {
+  let mockURL
+  let mockData
   describe('fetchData', () => {
     beforeEach(() => {
       window.fetch = jest.fn()
+       mockURL = 'https://swapi.co/api/people/';
+       mockData = 
     })
 
     it('should call fetch with the correct params', () => {
       //setup
-      const mockURL = 'https://swapi.co/api/people/';
+      // const mockURL = 'https://swapi.co/api/people/';
 
       //execution
       fetchData(mockURL);
@@ -17,5 +21,23 @@ describe('API', () => {
       //expectation
       expect(window.fetch).toHaveBeenCalledWith(mockURL)
     })
+  })
+
+  it('should return correct data if everything is OK,' async () => {
+    //setup
+
+  })
+
+  it('should throw an error if fetch is not ok', async () => {
+    //setup
+    // const mockURL = 'https://swapi.co/api/people/';
+    const expectedError = Error('Error fetching, 401')
+    window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+      status: 401,
+      ok: false,
+    }))
+
+    //execution
+    await expect(fetchData(mockURL)).rejects.toEqual(expectedError)
   })
 })

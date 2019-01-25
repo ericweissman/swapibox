@@ -21,7 +21,7 @@ class App extends Component {
   }
 
 //PlANET FETCHES
-fetchPlanetData = async () => {
+addPlanets = async () => {
   let allPlanets = [];
   const url = `https://swapi.co/api/planets/`;
   const planetData = await fetchData(url);
@@ -60,7 +60,7 @@ fetchResidents = (planets) => {
 
 
 //PEOPLE FETCHES
-fetchPeopleData = async () => {
+addPeople = async () => {
   let allPeople = [];
   const url = `https://swapi.co/api/people/`
 
@@ -90,8 +90,8 @@ addCrawl = async () => {
 
 componentDidMount = () =>  {
   this.addCrawl();
-  this.fetchPeopleData();
-  this.fetchPlanetData();
+  this.addPeople();
+  this.addPlanets();
 }
 
   render() {
