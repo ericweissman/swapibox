@@ -14,7 +14,7 @@ class App extends Component {
       people: [],
       planets: [],
       vehicles: [],
-      active: 'people'
+      active: 'planets'
     }
   }
 
