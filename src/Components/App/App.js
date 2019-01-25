@@ -3,7 +3,8 @@ import '../../Main.scss';
 import MovieText from '../MovieText/MovieText';
 import Controls from '../Controls/Controls';
 import CardContainer from '../CardContainer/CardContainer';
-import { fetchPeople, fetchData } from '../API/Fetches'
+import { fetchData } from '../API/Fetches'
+import { addHomeworlds, addSpecies, chooseRandomFilm } from '../Helpers/Helpers'
 
 
 class App extends Component {
@@ -66,67 +67,30 @@ fetchPeopleData = async () => {
   try {
     const peopleData = await fetchData(url);
     allPeople.push(...peopleData.results)
-    const withHome = await this.fetchHomeworlds(allPeople);
-    const people = await this.fetchSpecies(withHome);
+    const withHome = await addHomeworlds(allPeople);
+    const people = await addSpecies(withHome);
     this.setState({ people })
   } catch (error) {
     this.setState({errorStatus: error})
   }
 }
 
-fetchSpecies = (people) => {
-  const unresolvedPromises = people.map( async (person) => {
-    if (person.species.length > 0) {
-      const speciesData =  await fetchData(person.species[0]);
-      return ({
-          name: person.name,
-          homeworld: person.homeworld,
-          population: person.population,
-          species: speciesData.name
-        })
-    } else {
-      return({
-        name: person.name,
-        homeworld: person.homeworld,
-        population: person.population,
-        species: 'unknown'
-      })
-    }
-  })
-  return Promise.all(unresolvedPromises)
-}
 
-fetchHomeworlds = (people) => {
-  const unresolvedPromises = people.map( async (person) => {
-      const homeworldData = await fetchData(person.homeworld);
-      return ({ 
-        ...person, 
-        homeworld: homeworldData.name,
-        population: homeworldData.population,
-      })
-  })
-  return Promise.all(unresolvedPromises)
-}
-
-//MOVIE FETCH
-fetchCrawl = async () => {
-  let index =  Math.floor(Math.random() * 6 + 1)
-  const url = 'https://swapi.co/api/films/';
-  const filmData = await fetchData(url);
-  const crawlData = await filmData.results[index];
-
+addCrawl = async () => {
+  const movie = await chooseRandomFilm();
+  // if movie !== error 
   this.setState({
     films: {
-      title: crawlData.title,
-      crawl: crawlData.opening_crawl,
-      year: crawlData.release_date
+      title: movie.title,
+      crawl: movie.opening_crawl,
+      year: movie.release_date
     }});
 }
 
 
 componentDidMount = () =>  {
+  this.addCrawl();
   this.fetchPeopleData();
-  this.fetchCrawl();
   this.fetchPlanetData();
 }
 
