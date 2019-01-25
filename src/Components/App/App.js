@@ -3,6 +3,7 @@ import '../../Main.scss';
 import MovieText from '../MovieText/MovieText';
 import Controls from '../Controls/Controls';
 import CardContainer from '../CardContainer/CardContainer';
+import { fetchPeople } from '../API/Fetches'
 
 
 class App extends Component {
@@ -62,12 +63,12 @@ fetchResidents = (planets) => {
 //PEOPLE FETCHES
 fetchPeopleData = async () => {
   let allPeople = [];
-  for (let i = 1; i < 10; i++) {
-      const url = `https://swapi.co/api/people/?page=${i}`
-      const response = await fetch(url);
-      const result = await response.json();
-      allPeople.push(...result.results)
-    }
+    // const url = `https://swapi.co/api/people/`
+    // const response = await fetch(url);
+  const data = await fetchPeople();
+    allPeople.push(...data.results)
+
+
     const withHome = await this.fetchHomeworlds(allPeople);
     const people = await this.fetchSpecies(withHome);
     this.setState({ people })
@@ -127,9 +128,9 @@ fetchCrawl = async () => {
 
 
 componentDidMount = () =>  {
-  // this.fetchPeopleData();
+  this.fetchPeopleData();
   // this.fetchCrawl();
-  this.fetchPlanetData();
+  // this.fetchPlanetData();
 }
 
   render() {
