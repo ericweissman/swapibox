@@ -20,13 +20,18 @@ export const addHomeworlds = (people) => {
 export const addSpecies = (people) => {
   const unresolvedPromises = people.map( async (person) => {
     if (person.species.length > 0) {
-      const speciesData = await fetchData(person.species[0]);
-      return ({
-        name: person.name,
-        homeworld: person.homeworld,
-        population: person.population,
-        species: speciesData.name
-      })
+      try {
+        const speciesData = await fetchData(person.species[0]);
+        return ({
+          name: person.name,
+          homeworld: person.homeworld,
+          population: person.population,
+          species: speciesData.name
+        })
+      } catch (error) {
+        throw Error(error)
+      }
+
     } else {
       return ({
         name: person.name,
