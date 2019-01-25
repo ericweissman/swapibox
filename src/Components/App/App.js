@@ -14,19 +14,17 @@ class App extends Component {
       people: [],
       planets: [],
       vehicles: [],
-      active: ''
+      active: 'planets'
     }
   }
 
 //PlANET FETCHES
 fetchPlanetData = async () => {
   let allPlanets = [];
-  for (let i = 1; i <= 7; i++) {
-    const url = `https://swapi.co/api/planets/?page=${i}`;
-    const response = await fetch(url);
-    const result = await response.json();
-    allPlanets.push(...result.results)
-  }
+  const url = `https://swapi.co/api/planets/`;
+  const response = await fetch(url);
+  const result = await response.json();
+  allPlanets.push(...result.results)
   const planets = await this.fetchResidents(allPlanets)
   this.setState({ planets: planets })
 }
@@ -36,7 +34,6 @@ fetchResidents = (planets) => {
     if (planet.residents.length > 0) {
      let residentNames = [];
      for (let i = 0; i < planet.residents.length; i++) {
-       console.log('fire')
        const response = await fetch(planet.residents[i]);
        const result = await response.json();
        residentNames.push(result.name)
@@ -54,7 +51,7 @@ fetchResidents = (planets) => {
         terrain: planet.terrain,
         population: planet.population,
         climate: planet.climate,
-        residents: 'none'
+        residents: ['none']
       })
     }
   })
@@ -130,20 +127,24 @@ fetchCrawl = async () => {
 
 
 componentDidMount = () =>  {
-  this.fetchPeopleData();
-  // this.fetchCrawl();
-  // this.fetchPlanetData();
+  // this.fetchPeopleData();
+  this.fetchCrawl();
+  this.fetchPlanetData();
 }
 
   render() {
+    const { films, planets, people, vehicles, active } = this.state;
     return (
       <div className="App">
         <header>
           <Controls />
         </header>
         <main>
-          <MovieText films={this.state.films} />
-          <CardContainer active={this.state.active}/>
+          <MovieText films={films}/>
+          <CardContainer 
+            active={active}
+            category={this.state}
+            />
         </main>
       </div>
     );

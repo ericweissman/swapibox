@@ -3,11 +3,14 @@ import Card from '../Card/Card'
 import '../../Main.scss';
 
 const CardContainer = (props) => {
-  let { active } = props;
+  let { active, category } = props;
   if (active !== '') {
     return(
       <div className='card-container'>
-        <Card active={active}/>
+        <Card 
+          active={active}
+          category={category}
+        />
       </div>
     )} else {
       return (
