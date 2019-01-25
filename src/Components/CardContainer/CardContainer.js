@@ -3,12 +3,18 @@ import Card from '../Card/Card'
 import '../../Main.scss';
 
 const CardContainer = (props) => {
-  return(
-    <div className='card-container'>CardContainer
-
-      <Card />
-    </div>
-  )
-}
+  let { active } = props;
+  if (active !== '') {
+    return(
+      <div className='card-container'>
+        <Card active={active}/>
+      </div>
+    )} else {
+      return (
+        <div className='card-container'>
+          <h1>CHOOSE A CATEGORY</h1>
+        </div>
+      )}
+  }
 
 export default CardContainer;

@@ -12,7 +12,9 @@ class App extends Component {
     this.state = {
       films: {},
       people: [],
-      planets: []
+      planets: [],
+      vehicles: [],
+      active: ''
     }
   }
 
@@ -141,7 +143,7 @@ componentDidMount = () =>  {
         </header>
         <main>
           <MovieText films={this.state.films} />
-          <CardContainer />
+          <CardContainer active={this.state.active}/>
         </main>
       </div>
     );
