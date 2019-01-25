@@ -11,13 +11,13 @@ class Controls extends Component {
 
   render() {
     return(
-      <header>
+      <form>
         <h1>SWapiBox</h1>
         <button>People</button>
         <button>Planets</button>
         <button>Vehicles</button>
         <button>Favorites</button>
-      </header>
+      </form>
     )
   }
 }

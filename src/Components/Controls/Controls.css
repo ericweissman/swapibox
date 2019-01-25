@@ -1,10 +1,11 @@
 header {
-  background-color: #ed6aca;
+  background-color: #24272b;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  color: yellow;
 }
 /*# sourceMappingURL=Controls.css.map */

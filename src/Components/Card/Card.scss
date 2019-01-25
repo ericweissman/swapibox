@@ -1,3 +1,9 @@
-.card {
-  border: 1px solid blue;
+.people-card {
+  width: 250px;
+  height: 285px;
+  color: $accent;
+  margin: 20px;
+  border: 3px solid $accent;
+  border-radius: 4px;
+  background-color: #101111;
 }

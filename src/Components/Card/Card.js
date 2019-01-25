@@ -25,6 +25,7 @@ class Card extends Component {
           )
         });
         break;
+        
       case 'planets':
         return planets.map((planet) => {
           return(

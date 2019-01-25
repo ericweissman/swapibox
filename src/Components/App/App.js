@@ -14,7 +14,7 @@ class App extends Component {
       people: [],
       planets: [],
       vehicles: [],
-      active: 'planets'
+      active: 'people'
     }
   }
 
@@ -127,9 +127,9 @@ fetchCrawl = async () => {
 
 
 componentDidMount = () =>  {
-  // this.fetchPeopleData();
+  this.fetchPeopleData();
   this.fetchCrawl();
-  this.fetchPlanetData();
+  // this.fetchPlanetData();
 }
 
   render() {

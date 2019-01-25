@@ -1,5 +1,7 @@
-header {
-  background-color: #ed6aca;
+form {
+  background-color: $menus;
   display: flex;
   align-items: center;
+  color: $accent;
+  font-family: $title-font;
 }

@@ -1,3 +1,10 @@
 aside {
-  background-color: #59c5f7;
+  font-family: $title-font;
+  background-color: $menus;
+  color: $accent;
+  text-align: center;
+  min-height: 700px;
+  p {
+    font-family: $text-font;
+  }
 }

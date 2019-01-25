@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "AAAA,AAAA,eAAe,CAAC;EACd,gBAAgB,EAAE,OAAO;CAC1B",
+    "mappings": "",
     "sources": [
         "CardContainer.scss"
     ],
