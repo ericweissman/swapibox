@@ -8,10 +8,17 @@ nav {
   color: $accent;
   font-family: $title-font;
 
-  button {
+  .btn {
     cursor: pointer;
+    outline: none;
     &:hover {
       background-color: $accent;
     }
   }
-}
+     .active {
+      @extend .btn;
+      background-color: black;
+      color: $accent
+    }
+  
+  }
