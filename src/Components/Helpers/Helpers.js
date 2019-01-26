@@ -11,7 +11,7 @@ export const addHomeworlds = (people) => {
         population: homeworldData.population
       })
     } catch (error){
-      throw Error(error)
+      throw error
     }
   })
   return Promise.all(unresolvedPromises)

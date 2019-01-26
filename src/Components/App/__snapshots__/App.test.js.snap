@@ -5,17 +5,19 @@ exports[`App should match snapshot 1`] = `
   className="App"
 >
   <header>
-    <Controls />
+    <Controls
+      updateActive={[Function]}
+    />
   </header>
   <main>
     <MovieText
       films={Object {}}
     />
     <CardContainer
-      active="people"
+      active=""
       category={
         Object {
-          "active": "people",
+          "active": "",
           "errorStatus": "",
           "films": Object {},
           "people": Array [],
