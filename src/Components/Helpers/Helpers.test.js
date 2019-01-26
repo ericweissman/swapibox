@@ -63,10 +63,10 @@ describe('Helpers', () => {
 
   describe('chooseRandomFilm', () => {
     let mockMovieURL = 'https://swapi.co/api/films/'
-    let mockMovieData = [{results: [
+    let mockMovieData = {results: [
       {title: 'A'},
       {title: 'B'}
-    ]}]
+    ]}
     
     beforeEach(() => {
       Fetch.fetchData = jest.fn(() => mockMovieData)
@@ -76,20 +76,49 @@ describe('Helpers', () => {
       expect(Fetch.fetchData).toHaveBeenCalledWith(mockMovieURL)
     })
 
-    it('should return the list of movies after fetching', () => {
-      Helper.chooseRandomFilm();
-      expect(mockMovieData).toEqual(expect.arrayContaining(mockMovieData))
+    it('it should return the correct film', async () => {
+      let result = await Helper.chooseRandomFilm();
+      expect(mockMovieData.results).toContain(result)
     })
 
-    //need to test function to make index?
-    //need to test crawl or returning crawl?
-
-  //   it('should throw an error if there is an issue fetching', async () => {
-  //     Fetch.fetchData = jest.fn(() => {
-  //       throw Error('Error fetching, 401')
-  //     })
-  //     const expectedError = Error('Error fetching, 401');
-  //     await expect(Helper.chooseRandomFilm()).rejects.toThrow(expectedError)
-  //   })
+    it('should throw an error if there is an issue with fetch', async () => {
+      const expectedError = 'Error fetching, 401';
+      Fetch.fetchData = jest.fn(() => {
+        throw Error('Error fetching, 401')
+      })
+      await expect(Helper.chooseRandomFilm()).rejects.toThrow(expectedError)
+    })
   })
+
+  describe('cleanVehicles', () => {
+    let mockVehicles = [{
+      "name": "Sand Crawler",
+      "model": "Digger Crawler",
+      "manufacturer": "Corellia Mining Corporation",
+      "cost_in_credits": "150000",
+      "length": "36.8",
+      "max_atmosphering_speed": "30",
+      "crew": "46",
+      "passengers": "30",
+      "cargo_capacity": "50000",
+      "consumables": "2 months",
+      "vehicle_class": "wheeled",
+      "pilots": [],
+      "films": [
+        "https://swapi.co/api/films/5/",
+        "https://swapi.co/api/films/1/"
+      ],
+      "created": "2014-12-10T15:36:25.724000Z",
+      "edited": "2014-12-22T18:21:15.523587Z",
+      "url": "https://swapi.co/api/vehicles/4/"
+    }]
+    let result = [{
+      name: 'Sand Crawler',
+      model: "Digger Crawler", class: 'wheeled', passengers: '30'
+    }]
+    it('should returned the cleaned vehicle data', () => {
+      Helper.cleanVehicles(mockVehicles)
+      expect(Helper.cleanVehicles(mockVehicles)).toEqual(result)
+     })
+    })
 })

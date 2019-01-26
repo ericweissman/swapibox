@@ -64,6 +64,6 @@ export const chooseRandomFilm = async () => {
     let crawl = await films.results[index];
     return crawl
   } catch (error) {
-    return error
+    throw error
   }
 }
