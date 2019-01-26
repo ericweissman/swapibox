@@ -11,9 +11,11 @@ class Controls extends Component {
   }
 
   handleClick = (event) => {
+    const category = event.target.name
     event.preventDefault();
-    this.props.updateActive(event.target.name);
-    this.setState({active: event.target.name});
+    this.props.populateData(category);
+    this.props.updateActive(category);
+    this.setState({active: category});
 
     //if event.target.name === this.state.active
     //add className
@@ -26,7 +28,6 @@ class Controls extends Component {
         <h1>SWapiBox</h1>
         {
           buttons.map((button) => {
-            // const btnClass = this.state.active === button ? "active" : "btn"
             return(
               <button className={this.state.active === button ? "active" : "btn"} name={button} onClick={this.handleClick}>{button}</button>
             )

@@ -4,7 +4,7 @@ import '../../Main.scss';
 
 const CardContainer = (props) => {
   let { active, category } = props;
-  if (active !== '') {
+  if (active !== '' && category[active].length > 0) {
     return(
       <div className='card-container'>
         <Card 
@@ -12,9 +12,16 @@ const CardContainer = (props) => {
           category={category}
         />
       </div>
-    )} else {
+    )
+  } else if (active !== '' && category[active].length === 0) {
+    return(
+      <div className='card-container loading'>
+        <h1>Loading</h1>
+      </div>
+    )
+  } else {
       return (
-        <div className='card-container'>
+        <div className='card-container choose'>
           <h1>CHOOSE A CATEGORY</h1>
         </div>
       )}

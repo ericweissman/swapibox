@@ -25,6 +25,21 @@ updateActive = (category) => {
   this.setState({ active: category})
 }
 
+//Load Data
+populateData = (category) => {
+  switch(category) {
+    case 'people':
+      this.addPeople()
+      break;
+    case 'planets':
+      this.addPlanets();
+      break;
+    case 'vehicles':
+      this.addVehicles();
+      break;
+  }
+}
+
 //PlANET FETCHES
 addPlanets = async () => {
   let allPlanets = [];
@@ -96,22 +111,23 @@ addPeople = async () => {
 
 
 addCrawl = async () => {
-  const movie = await chooseRandomFilm();
-  // if movie !== error 
-  this.setState({
-    films: {
-      title: movie.title,
-      crawl: movie.opening_crawl,
-      year: movie.release_date
-    }});
+  try {
+    const movie = await chooseRandomFilm();
+    this.setState({
+      films: {
+        title: movie.title,
+        crawl: movie.opening_crawl,
+        year: movie.release_date
+      }
+    });
+  } catch (error) {
+    this.setState({errorStatus: error})
+  }
 }
 
 
 componentDidMount = () =>  {
   this.addCrawl();
-  // this.addPeople();
-  // this.addPlanets();
-  this.addVehicles();
 }
 
   render() {
@@ -119,7 +135,10 @@ componentDidMount = () =>  {
     return (
       <div className="App">
         <header>
-          <Controls updateActive={this.updateActive}/>
+          <Controls 
+            updateActive={this.updateActive}
+            populateData={this.populateData}
+            />
         </header>
         <main>
           <MovieText films={films}/>
