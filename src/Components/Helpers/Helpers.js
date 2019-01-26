@@ -1,6 +1,6 @@
 import { fetchData } from "../API/Fetches";
 
-//PEOPLE HELPERS
+//PEOPLE CLEANERS
 export const addHomeworlds = (people) => {
   const unresolvedPromises = people.map( async (person) =>{
     try {
@@ -44,9 +44,41 @@ export const addSpecies = (people) => {
   return Promise.all(unresolvedPromises)
 }
 
+//PLANET CLEANERS
+export const fetchResidents = (planets) => {
+  const unresolvedPromises = planets.map(async planet => {
+    if (planet.residents.length > 0) {
+      const residents = await residentsMap(planet.residents)
+      return ({
+        name: planet.name,
+        terrain: planet.terrain,
+        population: planet.population,
+        climate: planet.climate,
+        residents
+      })
+    } else {
+      return ({
+        name: planet.name,
+        terrain: planet.terrain,
+        population: planet.population,
+        climate: planet.climate,
+        residents: ['none']
+      })
+    }
+  })
+  return Promise.all(unresolvedPromises)
+}
+
+const residentsMap = (residents) => {
+  const unresolvedPromises = residents.map( async (resident) => {
+     const residentData = await fetchData(resident);
+     return residentData.name
+  })
+  return Promise.all(unresolvedPromises);
+}
 
 
-//Vehicle Cleaners
+//VEHICLE CLEANERS
 export const cleanVehicles = (vehicles) => {
   return vehicles.map((vehicle) => {
     return {
