@@ -44,6 +44,18 @@ export const addSpecies = (people) => {
   return Promise.all(unresolvedPromises)
 }
 
+//Vehicle Cleaners
+export const cleanVehicles = (vehicles) => {
+  return vehicles.map((vehicle) => {
+    return {
+      name: vehicle.name,
+      model: vehicle.model,
+      class: vehicle.vehicle_class,
+      passengers: vehicle.passengers
+    }
+  })
+}
+
 export const chooseRandomFilm = async () => {
   const url = 'https://swapi.co/api/films/';
   try {

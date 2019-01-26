@@ -4,7 +4,7 @@ import MovieText from '../MovieText/MovieText';
 import Controls from '../Controls/Controls';
 import CardContainer from '../CardContainer/CardContainer';
 import { fetchData } from '../API/Fetches'
-import { addHomeworlds, addSpecies, chooseRandomFilm } from '../Helpers/Helpers'
+import { addHomeworlds, addSpecies, chooseRandomFilm, cleanVehicles } from '../Helpers/Helpers'
 
 
 class App extends Component {
@@ -63,6 +63,20 @@ fetchResidents = (planets) => {
   return Promise.all(unresolvedPromises)
 }
 
+//VEHICLES
+addVehicles = async () => {
+  let allVehicles = [];
+  const url = 'https://swapi.co/api/vehicles/'
+
+  try {
+    const vehicleData = await fetchData(url);
+    allVehicles.push(...vehicleData.results)
+    const vehicles = cleanVehicles(allVehicles)
+    this.setState( { vehicles })
+  } catch (error) {
+    this.setState({errorStatus: error})
+  }
+}
 
 //PEOPLE FETCHES
 addPeople = async () => {
@@ -95,8 +109,9 @@ addCrawl = async () => {
 
 componentDidMount = () =>  {
   this.addCrawl();
-  this.addPeople();
-  this.addPlanets();
+  // this.addPeople();
+  // this.addPlanets();
+  this.addVehicles();
 }
 
   render() {
