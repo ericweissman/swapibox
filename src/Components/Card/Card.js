@@ -15,7 +15,7 @@ class Card extends Component {
       case 'people':
         return people.map((person) =>{
           return(
-            <div className="people-card">
+            <div className="card people-card">
               <h3>{person.name}</h3>
               <p>Homeworld: {person.homeworld}</p>
               <p>Population: {person.population}</p>
@@ -29,7 +29,7 @@ class Card extends Component {
       case 'planets':
         return planets.map((planet) => {
           return(
-            <div className='planet-card'>
+            <div className='card planet-card'>
               <h3>{planet.name}</h3>
               <p>Terrain: {planet.terrain}</p>
               <p>Population: {planet.population}</p>
@@ -43,6 +43,18 @@ class Card extends Component {
                   })
                 }
               </ul>
+            </div>
+          )
+        })
+      case 'vehicles':
+        return vehicles.map((vehicle) => {
+          return(
+            <div className="card vehicle-card">
+              <h3>{vehicle.name}</h3>
+              <p>Model: {vehicle.model}</p>
+              <p>Class: {vehicle.class}</p>
+              <p>Passengers: {vehicle.passengers}</p>
+              <button>Add to Favorites</button>
             </div>
           )
         })
