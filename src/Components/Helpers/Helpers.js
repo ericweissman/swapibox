@@ -29,7 +29,7 @@ export const addSpecies = (people) => {
           species: speciesData.name
         })
       } catch (error) {
-        throw Error(error)
+        throw (error)
       }
 
     } else {
