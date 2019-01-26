@@ -13,7 +13,6 @@ describe('API', () => {
 
     it('should call fetch with the correct params', () => {
       //setup
-      // const mockURL = 'https://swapi.co/api/people/';
 
       //execution
       fetchData(mockURL);
@@ -32,13 +31,10 @@ describe('API', () => {
     //execution and expectation
     const results = await fetchData(mockURL)
     expect(results).toEqual(mockData)
-
-
   })
 
   it('should throw an error if fetch is not ok', async () => {
     //setup
-    // const mockURL = 'https://swapi.co/api/people/';
     const expectedError = Error('Error fetching, 401')
     window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
       status: 401,
