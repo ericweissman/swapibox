@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from '../Card/Card'
 import '../../Main.scss';
+import PropTypes from 'prop-types'
 
 const CardContainer = (props) => {
   let { active, category } = props;
@@ -26,5 +27,17 @@ const CardContainer = (props) => {
         </div>
       )}
   }
+
+CardContainer.propTypes = {
+  active: PropTypes.string,
+  category: PropTypes.shape({
+    films: PropTypes.object,
+    people: PropTypes.array,
+    planets: PropTypes.array,
+    vehicles: PropTypes.array,
+    active: PropTypes.string,
+    errorStatus: PropTypes.errorStatus
+  })
+}
 
 export default CardContainer;
