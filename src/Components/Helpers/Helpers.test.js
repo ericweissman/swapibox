@@ -54,9 +54,10 @@ describe('Helpers', () => {
   })
 
   describe('fetchResidents', () => {
-    const mockPlanets = [{ name: 'Earth', terrain: 'rocky', population: '2', climate: 'sunny', residents: ['urll.com'], id: '2' }, { name: 'Earth', terrain: 'rocky', population: '2', climate: 'sunny', residents: [], id: '23'}]
-    const mockResidents = [{ name: 'Earth', terrain: 'rocky', population: '2', climate: 'sunny', residents: ['Luke'], id: '2' }, { name: 'Earth', terrain: 'rocky', population: '2', climate: 'sunny', residents: [], id: '23' }]
-    const mockResidentsMap = jest.fn(() => mockResidents)
+    const mockPlanets = [{ name: 'Earth', terrain: 'rocky', population: '2', climate: 'sunny', residents: ['urll.com'], created: '2', surface_water: '1' }, { name: 'Earth', terrain: 'rocky', population: '2', climate: 'sunny', residents: [], created: '23', surface_water: '34'}]
+    const mockResidents = [{ name: 'Earth', terrain: 'rocky', population: '2', climate: 'sunny', residents: ['Luke'], id: '2', favorite: false }, { name: 'Earth', terrain: 'rocky', population: '2', climate: 'sunny', residents: ['No Residents'], id: '23', favorite: false }]
+    let mockResidentData = { name: 'Luke' }
+    const residentsMap = jest.fn(() => mockResidentData)
 
     beforeEach(() => {
       Fetch.fetchData = jest.fn(() => mockPlanets)
@@ -64,9 +65,16 @@ describe('Helpers', () => {
 
     it('should call the correct number of fetches', async () => {
       Helper.fetchResidents(mockPlanets);
-      
       expect(Fetch.fetchData).toHaveBeenCalledTimes(1)
     })
+
+    // it('should return the correct properties after running fetchResidents', async () => {
+    //   const result = await Helper.fetchResidents(mockPlanets);
+    //   expect(result).toEqual(mockResidents)
+
+    // })
+
+
    //given 2 planets (one with URL, one without)
    // mock residents map - returns mock residents  const mapResult = await Helper.mockResidentsMap()
    

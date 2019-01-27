@@ -9,7 +9,4 @@ describe('MovieText', () => {
    const wrapper = shallow(<MovieText films={films} />)
    expect(wrapper).toMatchSnapshot();
   });
-
-  
-
-})
+}) 
