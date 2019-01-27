@@ -15,6 +15,7 @@ class App extends Component {
       people: [],
       planets: [],
       vehicles: [],
+      favorites: [],
       active: '',
       errorStatus: ''
     }
@@ -98,13 +99,14 @@ componentDidMount = () =>  {
 }
 
   render() {
-    const { films, active } = this.state;
+    const { films, active, favorites } = this.state;
     return (
       <div className="App">
         <header>
           <Controls 
             updateActive={this.updateActive}
             populateData={this.populateData}
+            favorites={favorites}
             />
         </header>
         <main>

@@ -21,14 +21,22 @@ class Controls extends Component {
 
   render() {
     const buttons = ['people', 'planets', 'vehicles', 'favorites']
+    let { favorites } = this.props
     return(
       <nav>
         <h1>SWapiBox</h1>
         {
           buttons.map((button) => {
-            return(
-              <button className={this.state.active === button ? "active" : "btn"} name={button} onClick={this.handleClick}>{button}</button>
-            )
+            if (button !== 'favorites') {
+              return (
+                <button className={this.state.active === button ? "active" : "btn"} name={button} onClick={this.handleClick}>{button}</button>
+              )
+            } else {
+              return (
+                <button className={this.state.active === button ? "active" : "btn"} name={button} onClick={this.handleClick}>{button} {favorites.length}</button>
+              )
+            }
+            
           })
         }
       </nav>
