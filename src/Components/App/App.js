@@ -40,7 +40,6 @@ populateData = (category) => {
   }
 }
 
-//PlANET FETCHES
 addPlanets = async () => {
   let allPlanets = [];
   const url = `https://swapi.co/api/planets/`;
@@ -50,8 +49,6 @@ addPlanets = async () => {
   this.setState({ planets: planets })
 }
 
-
-//VEHICLES
 addVehicles = async () => {
   let allVehicles = [];
   const url = 'https://swapi.co/api/vehicles/'
@@ -66,7 +63,6 @@ addVehicles = async () => {
   }
 }
 
-//PEOPLE FETCHES
 addPeople = async () => {
   let allPeople = [];
   const url = `https://swapi.co/api/people/`
@@ -81,7 +77,6 @@ addPeople = async () => {
     this.setState({errorStatus: error})
   }
 }
-
 
 addCrawl = async () => {
   try {
@@ -98,13 +93,12 @@ addCrawl = async () => {
   }
 }
 
-
 componentDidMount = () =>  {
   this.addCrawl();
 }
 
   render() {
-    const { films, planets, people, vehicles, active } = this.state;
+    const { films, active } = this.state;
     return (
       <div className="App">
         <header>

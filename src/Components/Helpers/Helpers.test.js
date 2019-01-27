@@ -34,6 +34,29 @@ describe('Helpers', () => {
     })
   })
 
+  describe('residentsMap', () => {
+    let mockResidentURLs = ['a.com', 'b.com']
+    // let mockResidentData = [{name: 'Chewy'}, {name: 'Luke'}]
+    let mockResidentData = {name: 'Luke'}
+
+    //given 2 urls, it should return an array of 2 names
+
+    beforeEach(() => {
+      Fetch.fetchData = jest.fn(() => mockResidentData)
+    })
+
+    it('should call the correct number of fetches', () => {
+      Helper.residentsMap(mockResidentURLs);
+      expect(Fetch.fetchData).toHaveBeenCalledTimes(2)
+    })
+
+    it('should return the names of residents when given 2 urls', async () => {
+      const result = await Helper.residentsMap(mockResidentURLs);
+      expect(result).toEqual(['Luke', 'Luke'])
+    })
+
+  })
+
   describe('addSpecies', () => {
     let mockPeople = [{ name: 'Luke', homeworld: 'Mars', population: '12345', species: [] }, { name: 'Han', homeworld: 'Mars', population: '12345', species: [mockSpeciesURL] }]
     let mockSpeciesData = { name: 'human' }
@@ -121,4 +144,5 @@ describe('Helpers', () => {
       expect(Helper.cleanVehicles(mockVehicles)).toEqual(result)
      })
     })
+  
 })

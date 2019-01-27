@@ -26,7 +26,8 @@ export const addSpecies = (people) => {
           name: person.name,
           homeworld: person.homeworld,
           population: person.population,
-          species: speciesData.name
+          species: speciesData.name,
+          id: person.created
         })
       } catch (error) {
         throw (error)
@@ -37,7 +38,8 @@ export const addSpecies = (people) => {
         name: person.name,
         homeworld: person.homeworld,
         population: person.population,
-        species: 'unknown'
+        species: 'unknown',
+        id: person.created
       })
     }
   })
@@ -54,7 +56,8 @@ export const fetchResidents = (planets) => {
         terrain: planet.terrain,
         population: planet.population,
         climate: planet.climate,
-        residents
+        residents,
+        id: planet.created
       })
     } else {
       return ({
@@ -62,16 +65,17 @@ export const fetchResidents = (planets) => {
         terrain: planet.terrain,
         population: planet.population,
         climate: planet.climate,
-        residents: ['none']
+        residents: ['none'],
+        id: planet.created
       })
     }
   })
   return Promise.all(unresolvedPromises)
 }
 
-const residentsMap = (residents) => {
-  const unresolvedPromises = residents.map( async (resident) => {
-     const residentData = await fetchData(resident);
+export const residentsMap = (urls) => {
+  const unresolvedPromises = urls.map( async (url) => {
+     const residentData = await fetchData(url);
      return residentData.name
   })
   return Promise.all(unresolvedPromises);
@@ -85,7 +89,8 @@ export const cleanVehicles = (vehicles) => {
       name: vehicle.name,
       model: vehicle.model,
       class: vehicle.vehicle_class,
-      passengers: vehicle.passengers
+      passengers: vehicle.passengers,
+      id: vehicle.created
     }
   })
 }
