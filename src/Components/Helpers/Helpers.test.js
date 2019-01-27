@@ -55,21 +55,21 @@ describe('Helpers', () => {
 
   describe('fetchResidents', () => {
     const mockPlanets = [{ name: 'Earth', terrain: 'rocky', population: '2', climate: 'sunny', residents: ['urll.com'], id: '2' }, { name: 'Earth', terrain: 'rocky', population: '2', climate: 'sunny', residents: [], id: '23'}]
-    const mockResidents = ['Eric']
+    const mockResidents = [{ name: 'Earth', terrain: 'rocky', population: '2', climate: 'sunny', residents: ['Luke'], id: '2' }, { name: 'Earth', terrain: 'rocky', population: '2', climate: 'sunny', residents: [], id: '23' }]
     const mockResidentsMap = jest.fn(() => mockResidents)
+
     beforeEach(() => {
       Fetch.fetchData = jest.fn(() => mockPlanets)
     })
 
-    //it should call fetch twice with two planets
-    it('should call the correct number of fetches', () => {
+    it('should call the correct number of fetches', async () => {
       Helper.fetchResidents(mockPlanets);
+      
       expect(Fetch.fetchData).toHaveBeenCalledTimes(1)
     })
-    //it should return the correct residents if the array.lenght is greater than one
-    it('should return the correct number of residents if there is not an empty residents property', () => {
-
-    })
+   //given 2 planets (one with URL, one without)
+   // mock residents map - returns mock residents  const mapResult = await Helper.mockResidentsMap()
+   
     //it should return 'No Residents if there is no residents
 
   })

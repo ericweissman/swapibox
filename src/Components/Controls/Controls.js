@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../../Main.scss';
+import PropTypes from 'prop-types'
 import { throws } from 'assert';
 
 class Controls extends Component {
@@ -33,6 +34,11 @@ class Controls extends Component {
       </nav>
     )
   }
+}
+
+Controls.propTypes = {
+  populateData: PropTypes.func,
+  updateActive: PropTypes.func
 }
 
 export default Controls;
