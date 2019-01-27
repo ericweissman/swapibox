@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MovieText should match snapshot 1`] = `
+<aside>
+  <h2>
+    Title
+  </h2>
+  <h3>
+    1996
+  </h3>
+  <p>
+    Text
+  </p>
+</aside>
+`;
