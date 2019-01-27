@@ -27,7 +27,8 @@ export const addSpecies = (people) => {
           homeworld: person.homeworld,
           population: person.population,
           species: speciesData.name,
-          id: person.created
+          id: person.created,
+          favorite: false
         })
       } catch (error) {
         throw (error)
@@ -39,7 +40,8 @@ export const addSpecies = (people) => {
         homeworld: person.homeworld,
         population: person.population,
         species: 'unknown',
-        id: person.created
+        id: person.created,
+        favorite: false
       })
     }
   })
@@ -57,7 +59,8 @@ export const fetchResidents = (planets) => {
         population: planet.population,
         climate: planet.climate,
         residents,
-        id: planet.created
+        id: planet.created,
+        favorite: false
       })
     } else {
       return ({
@@ -65,8 +68,9 @@ export const fetchResidents = (planets) => {
         terrain: planet.terrain,
         population: planet.population,
         climate: planet.climate,
-        residents: ['none'],
-        id: planet.created
+        residents: ['No Residents'],
+        id: planet.created,
+        favorite: false
       })
     }
   })
@@ -90,7 +94,8 @@ export const cleanVehicles = (vehicles) => {
       model: vehicle.model,
       class: vehicle.vehicle_class,
       passengers: vehicle.passengers,
-      id: vehicle.created
+      id: vehicle.created,
+      favorite: false
     }
   })
 }

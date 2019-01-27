@@ -6,7 +6,7 @@ describe('Helpers', () => {
   let mockHomeworldURL = 'fakeURL.biz';
   let mockSpeciesURL = 'species.com'
 
-  let mockPeople = [{ name: 'Luke', homeworld: mockHomeworldURL, species: [] }, { name: 'Han', homeworld: mockHomeworldURL, species: [mockSpeciesURL] }]
+  let mockPeople = [{ name: 'Luke', homeworld: mockHomeworldURL, species: [], id: '1', favorite: false }, { name: 'Han', homeworld: mockHomeworldURL, species: [mockSpeciesURL], id: '2', favorite: false }]
 
   describe('addHomeworlds', () => {
     let mockPlanetInfo = {name: 'Mars', population: '12345'};
@@ -16,7 +16,7 @@ describe('Helpers', () => {
     
     it('should return people with a homeworld and population', async () => {
       const result = await Helper.addHomeworlds(mockPeople);
-      const expected = [{ name: 'Luke', homeworld: 'Mars', population: '12345', species: [] }, { name: 'Han', homeworld: 'Mars', population: '12345', species: [mockSpeciesURL] }]
+      const expected = [{ name: 'Luke', homeworld: 'Mars', population: '12345', species: [], id: '1', favorite: false }, { name: 'Han', homeworld: 'Mars', population: '12345', species: [mockSpeciesURL], id: '2', favorite: false }]
       expect(result).toEqual(expected)
     })
 
@@ -36,10 +36,7 @@ describe('Helpers', () => {
 
   describe('residentsMap', () => {
     let mockResidentURLs = ['a.com', 'b.com']
-    // let mockResidentData = [{name: 'Chewy'}, {name: 'Luke'}]
     let mockResidentData = {name: 'Luke'}
-
-    //given 2 urls, it should return an array of 2 names
 
     beforeEach(() => {
       Fetch.fetchData = jest.fn(() => mockResidentData)
@@ -54,11 +51,31 @@ describe('Helpers', () => {
       const result = await Helper.residentsMap(mockResidentURLs);
       expect(result).toEqual(['Luke', 'Luke'])
     })
+  })
+
+  describe('fetchResidents', () => {
+    const mockPlanets = [{ name: 'Earth', terrain: 'rocky', population: '2', climate: 'sunny', residents: ['urll.com'], id: '2' }, { name: 'Earth', terrain: 'rocky', population: '2', climate: 'sunny', residents: [], id: '23'}]
+    const mockResidents = ['Eric']
+    const mockResidentsMap = jest.fn(() => mockResidents)
+    beforeEach(() => {
+      Fetch.fetchData = jest.fn(() => mockPlanets)
+    })
+
+    //it should call fetch twice with two planets
+    it('should call the correct number of fetches', () => {
+      Helper.fetchResidents(mockPlanets);
+      expect(Fetch.fetchData).toHaveBeenCalledTimes(1)
+    })
+    //it should return the correct residents if the array.lenght is greater than one
+    it('should return the correct number of residents if there is not an empty residents property', () => {
+
+    })
+    //it should return 'No Residents if there is no residents
 
   })
 
   describe('addSpecies', () => {
-    let mockPeople = [{ name: 'Luke', homeworld: 'Mars', population: '12345', species: [] }, { name: 'Han', homeworld: 'Mars', population: '12345', species: [mockSpeciesURL] }]
+    let mockPeople = [{ name: 'Luke', homeworld: 'Mars', population: '12345', species: [], created: '1' }, { name: 'Han', homeworld: 'Mars', population: '12345', species: [mockSpeciesURL], created: '2' }]
     let mockSpeciesData = { name: 'human' }
     beforeEach(() => {
       Fetch.fetchData = jest.fn(() => mockSpeciesData)
@@ -66,7 +83,7 @@ describe('Helpers', () => {
 
     it('should return people with the correct species if they have a species URL', async () => {
       const result = await Helper.addSpecies(mockPeople);
-      const expected = [{ name: 'Luke', homeworld: 'Mars', population: '12345', species: 'unknown' }, { name: 'Han', homeworld: 'Mars', population: '12345', species: 'human' }]
+      const expected = [{ name: 'Luke', homeworld: 'Mars', population: '12345', species: 'unknown', id: '1', favorite: false }, { name: 'Han', homeworld: 'Mars', population: '12345', species: 'human', id: '2', favorite: false}]
       await expect(result).toEqual(expected)
     })
 
@@ -137,7 +154,7 @@ describe('Helpers', () => {
     }]
     let result = [{
       name: 'Sand Crawler',
-      model: "Digger Crawler", class: 'wheeled', passengers: '30'
+      model: "Digger Crawler", class: 'wheeled', passengers: '30', id: "2014-12-10T15:36:25.724000Z", favorite: false
     }]
     it('should returned the cleaned vehicle data', () => {
       Helper.cleanVehicles(mockVehicles)
