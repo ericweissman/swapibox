@@ -2,6 +2,7 @@ import React from 'react';
 import Card from '../Card/Card'
 import '../../Main.scss';
 import PropTypes from 'prop-types'
+import { uid } from 'uid'
 
 const CardContainer = (props) => {
   let { active, category } = props;
@@ -9,6 +10,7 @@ const CardContainer = (props) => {
     return(
       <div className='card-container'>
         <Card 
+          key={uid}
           active={active}
           category={category}
         />

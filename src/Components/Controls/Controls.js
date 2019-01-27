@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import '../../Main.scss';
 import PropTypes from 'prop-types'
 import { throws } from 'assert';
+import { uid } from 'uid'
+
 
 class Controls extends Component {
   constructor(props) {

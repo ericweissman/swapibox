@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import '../../Main.scss';
+import { uid } from 'uid'
+
 import MovieText from '../MovieText/MovieText';
 import Controls from '../Controls/Controls';
 import CardContainer from '../CardContainer/CardContainer';
@@ -103,15 +105,17 @@ componentDidMount = () =>  {
     return (
       <div className="App">
         <header>
-          <Controls 
+          <Controls
+            key={uid} 
             updateActive={this.updateActive}
             populateData={this.populateData}
             favorites={favorites}
             />
         </header>
         <main>
-          <MovieText films={films}/>
-          <CardContainer 
+          <MovieText key={uid} films={films}/>
+          <CardContainer
+            key={uid} 
             active={active}
             category={this.state}
             />
