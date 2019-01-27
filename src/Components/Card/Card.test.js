@@ -17,13 +17,13 @@ describe('Card', () => {
     expect(wrapper).toMatchSnapshot();
   })
 
-  it('should match the correct snapshot when people is passed as props', () => {
+  it('should match the correct snapshot when planets is passed as props', () => {
     activeMock = 'planets';
     wrapper = shallow(<Card active={activeMock} category={categoryMock} />)
     expect(wrapper).toMatchSnapshot();
   })
 
-  it('should match the correct snapshot when people is passed as props', () => {
+  it('should match the correct snapshot when vehicles is passed as props', () => {
     activeMock = 'vehicles';
     wrapper = shallow(<Card active={activeMock} category={categoryMock} />)
     expect(wrapper).toMatchSnapshot();

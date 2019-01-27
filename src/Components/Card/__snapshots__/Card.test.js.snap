@@ -25,7 +25,7 @@ exports[`Card should match the correct snapshot when people is passed as props 1
 </div>
 `;
 
-exports[`Card should match the correct snapshot when people is passed as props 2`] = `
+exports[`Card should match the correct snapshot when planets is passed as props 1`] = `
 <div
   className="card planet-card"
 >
@@ -53,7 +53,7 @@ exports[`Card should match the correct snapshot when people is passed as props 2
 </div>
 `;
 
-exports[`Card should match the correct snapshot when people is passed as props 3`] = `
+exports[`Card should match the correct snapshot when vehicles is passed as props 1`] = `
 <div
   className="card vehicle-card"
 >
