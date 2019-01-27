@@ -6,6 +6,7 @@ exports[`App should match snapshot 1`] = `
 >
   <header>
     <Controls
+      favorites={Array []}
       populateData={[Function]}
       updateActive={[Function]}
     />
@@ -20,6 +21,7 @@ exports[`App should match snapshot 1`] = `
         Object {
           "active": "",
           "errorStatus": "",
+          "favorites": Array [],
           "films": Object {},
           "people": Array [],
           "planets": Array [],

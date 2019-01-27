@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../Main.scss';
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
 const Card = (props) => {
   let { people, planets, vehicles } = props.category

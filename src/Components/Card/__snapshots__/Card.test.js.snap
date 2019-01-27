@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card should match the correct snapshot when people is passed as props 1`] = `
+<div
+  className="card people-card"
+>
+  <h3>
+    a
+  </h3>
+  <p>
+    Homeworld: 
+    b
+  </p>
+  <p>
+    Population: 
+    c
+  </p>
+  <p>
+    Species: 
+    d
+  </p>
+  <button>
+    Add to Favorites
+  </button>
+</div>
+`;
+
+exports[`Card should match the correct snapshot when people is passed as props 2`] = `
+<div
+  className="card planet-card"
+>
+  <h3>
+    a
+  </h3>
+  <p>
+    Terrain: 
+    b
+  </p>
+  <p>
+    Population: 
+    c
+  </p>
+  <p>
+    Climate: 
+    d
+  </p>
+  <ul>
+    Residents: 
+    <li>
+      lile
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Card should match the correct snapshot when people is passed as props 3`] = `
+<div
+  className="card vehicle-card"
+>
+  <h3>
+    a
+  </h3>
+  <p>
+    Model: 
+  </p>
+  <p>
+    Class: 
+    b
+  </p>
+  <p>
+    Passengers: 
+    c
+  </p>
+  <button>
+    Add to Favorites
+  </button>
+</div>
+`;
