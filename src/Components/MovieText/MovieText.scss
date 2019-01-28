@@ -1,3 +1,38 @@
 aside {
-  background-color: #59c5f7;
+  font-family: $title-font;
+  background-color: $menus;
+  color: $accent;
+  text-align: center;
+  min-height: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h2 {
+    font-size: 35px;
+    animation: slideInY 8s ease 0s 1 normal; 
+    animation-fill-mode: forwards;
+  }
+  h3 {
+    margin: 0;
+    animation: slideInY 8s ease 0s 1 normal; 
+    animation-fill-mode: forwards;
+  }
+  p {
+    font-family: $text-font;
+    width: 285px;
+    font-size: 20px;
+    line-height: 30px;
+    color: $text;
+    animation: slideInY 8s ease 0s 1 normal; 
+    animation-fill-mode: forwards;
+  }
+}
+
+@keyframes slideInY {
+  0% {
+    transform: translateY(500px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }

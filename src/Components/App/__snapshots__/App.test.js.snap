@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App should match snapshot 1`] = `
+<div
+  className="App"
+>
+  <header>
+    <Controls
+      favorites={Array []}
+      populateData={[Function]}
+      updateActive={[Function]}
+    />
+  </header>
+  <main>
+    <MovieText
+      films={Object {}}
+    />
+    <CardContainer
+      active=""
+      category={
+        Object {
+          "active": "",
+          "errorStatus": "",
+          "favorites": Array [],
+          "films": Object {},
+          "people": Array [],
+          "planets": Array [],
+          "vehicles": Array [],
+        }
+      }
+    />
+  </main>
+</div>
+`;

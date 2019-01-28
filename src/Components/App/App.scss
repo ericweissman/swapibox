@@ -1,4 +1,12 @@
+.App {
+  background-image: url('https://i.stack.imgur.com/Mv83H.png');
+  min-height: 700px;
+}
 main {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 375px 2fr;
+}
+
+header {
+  background-color: $menus;
 }

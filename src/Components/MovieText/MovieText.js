@@ -1,5 +1,7 @@
 import React from 'react';
 import '../../Main.scss';
+import PropTypes from 'prop-types'
+
 
 const MovieText = (props) => {
   const {title, year, crawl} = props.films
@@ -10,6 +12,14 @@ const MovieText = (props) => {
       <p>{crawl}</p>
     </aside>
   )
+}
+
+MovieText.propTypes = {
+  films: PropTypes.shape({
+    title: PropTypes.string,
+    year: PropTypes.string,
+    crawl: PropTypes.string
+  })
 }
 
 export default MovieText;

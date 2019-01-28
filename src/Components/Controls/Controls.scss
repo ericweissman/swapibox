@@ -1,5 +1,42 @@
-header {
-  background-color: #ed6aca;
+nav {
+  h1 {
+    border: 2px solid $accent;
+    padding: 10px;
+    margin-left: 80px;
+    border-radius: 20px;
+    font-size: 50px;
+  }
+  background-color: $menus;
   display: flex;
   align-items: center;
-}
+  justify-content: space-between;
+  color: $accent;
+  font-family: $h1-font;
+
+  .btn {
+    font-family: $title-font;
+    text-transform: capitalize;
+    cursor: pointer;
+    outline: none;
+    font-size: 22px;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 0px 20px;
+    width: 150px;
+    border: 2px solid $accent;
+    background-color: $menus;
+    color: $text;
+    &:hover {
+      background-color: $accent;
+      color: black;
+    }
+  }
+     .active {
+      @extend .btn;
+      background-color: $accent;
+      color: black;
+    }
+  div {
+    margin-right: 100px;
+  }
+  }

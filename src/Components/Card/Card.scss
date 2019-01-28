@@ -1,3 +1,32 @@
 .card {
-  border: 1px solid blue;
+  width: 250px;
+  height: 285px;
+  color: $text;
+  margin: 20px;
+  border: 3px solid $accent;
+  border-radius: 4px;
+  background-color: #101111;
+  text-transform: uppercase;
 }
+// .people-card {
+//   width: 250px;
+//   height: 285px;
+//   color: $text;
+//   margin: 20px;
+//   border: 3px solid $accent;
+//   border-radius: 4px;
+//   background-color: #101111;
+//   text-transform: uppercase;
+// }
+
+// .planet-card {
+//   width: 250px;
+//   height: 285px;
+//   color: $text;
+//   margin: 20px;
+//   border: 3px solid $accent;
+//   border-radius: 4px;
+//   background-color: #101111;
+//   text-transform: uppercase;
+
+// }

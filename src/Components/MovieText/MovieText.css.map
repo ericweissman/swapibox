@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAC;EACJ,gBAAgB,EAAE,KAAK;EACvB,WAAW,EAAE,WAAW;EACxB,KAAK,EAAE,MAAM;CACd",
+    "sources": [
+        "MovieText.scss"
+    ],
+    "names": [],
+    "file": "MovieText.css"
+}

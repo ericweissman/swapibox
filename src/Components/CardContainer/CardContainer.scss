@@ -1,3 +1,30 @@
 .card-container {
-  background-color: #58f785;
+  font-family: $text-font;
+    color: $accent;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px 10px;
+}
+
+.choose {
+  h2 {
+    font-size: 35px;
+    text-transform: uppercase;
+  }
+}
+
+.loading {
+  animation: ySpinLoad 2.6s linear 0s infinite normal; 
+  animation-fill-mode: forwards;
+  @extend .choose
+}
+
+@keyframes ySpinLoad {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
 }

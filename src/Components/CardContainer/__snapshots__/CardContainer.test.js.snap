@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CardContainer should match the correct snapshot for onload 1`] = `
+<div
+  className="card-container choose"
+>
+  <h1>
+    CHOOSE A CATEGORY
+  </h1>
+</div>
+`;
+
+exports[`CardContainer should match the correct snapshot when a category is selected and fetching is complete 1`] = `
+<div
+  className="card-container"
+>
+  <Card
+    active="people"
+    category={
+      Object {
+        "people": Array [
+          Object {
+            "homeworld": "b",
+            "name": "a",
+            "population": "c",
+            "species": "d",
+          },
+        ],
+        "planets": Array [
+          Object {
+            "climate": "d",
+            "name": "a",
+            "population": "c",
+            "residents": Array [
+              "lile",
+            ],
+            "terrain": "b",
+          },
+        ],
+        "vehicles": Array [
+          Object {
+            "class": "b",
+            "name": "a",
+            "passengers": "c",
+          },
+        ],
+      }
+    }
+  />
+</div>
+`;
+
+exports[`CardContainer should match the correct snapshot when a category is selected but it is still fetching 1`] = `
+<div
+  className="card-container loading"
+>
+  <h1>
+    Loading
+  </h1>
+</div>
+`;

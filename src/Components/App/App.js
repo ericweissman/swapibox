@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import '../../Main.scss';
+import { uid } from 'uid'
+
 import MovieText from '../MovieText/MovieText';
 import Controls from '../Controls/Controls';
 import CardContainer from '../CardContainer/CardContainer';
+import { fetchData } from '../API/Fetches'
+import { addHomeworlds, addSpecies, chooseRandomFilm, cleanVehicles, fetchResidents} from '../Helpers/Helpers'
 
 
 class App extends Component {
@@ -11,136 +15,110 @@ class App extends Component {
     this.state = {
       films: {},
       people: [],
-      planets: []
+      planets: [],
+      vehicles: [],
+      favorites: [],
+      active: '',
+      errorStatus: ''
     }
   }
 
-//PlANET FETCHES
-fetchPlanetData = async () => {
-  let allPlanets = [];
-  for (let i = 1; i <= 7; i++) {
-    const url = `https://swapi.co/api/planets/?page=${i}`;
-    const response = await fetch(url);
-    const result = await response.json();
-    allPlanets.push(...result.results)
+//Change active
+updateActive = (category) => {
+  this.setState({ active: category})
+}
+
+//Load Data
+populateData = (category) => {
+  switch(category) {
+    case 'people':
+      this.addPeople()
+      break;
+    case 'planets':
+      this.addPlanets();
+      break;
+    case 'vehicles':
+      this.addVehicles();
+      break;
   }
-  const planets = await this.fetchResidents(allPlanets)
+}
+
+addPlanets = async () => {
+  let allPlanets = [];
+  const url = `https://swapi.co/api/planets/`;
+  const planetData = await fetchData(url);
+  allPlanets.push(...planetData.results)
+  const planets = await fetchResidents(allPlanets)
   this.setState({ planets: planets })
 }
 
-fetchResidents = (planets) => {
-  const unresolvedPromises = planets.map( async planet => {
-    if (planet.residents.length > 0) {
-     let residentNames = [];
-     for (let i = 0; i < planet.residents.length; i++) {
-       console.log('fire')
-       const response = await fetch(planet.residents[i]);
-       const result = await response.json();
-       residentNames.push(result.name)
-     }
-      return ({
-        name: planet.name,
-        terrain: planet.terrain,
-        population: planet.population,
-        climate: planet.climate,
-        residents: residentNames
-      })
-    } else {
-      return ({
-        name: planet.name,
-        terrain: planet.terrain,
-        population: planet.population,
-        climate: planet.climate,
-        residents: 'none'
-      })
-    }
-  })
-  return Promise.all(unresolvedPromises)
-}
+addVehicles = async () => {
+  let allVehicles = [];
+  const url = 'https://swapi.co/api/vehicles/'
 
-
-//PEOPLE FETCHES
-fetchPeopleData = async () => {
-  let allPeople = [];
-  for (let i = 1; i < 10; i++) {
-      const url = `https://swapi.co/api/people/?page=${i}`
-      const response = await fetch(url);
-      const result = await response.json();
-      allPeople.push(...result.results)
-    }
-    const withHome = await this.fetchHomeworlds(allPeople);
-    const people = await this.fetchSpecies(withHome);
-    this.setState({ people })
+  try {
+    const vehicleData = await fetchData(url);
+    allVehicles.push(...vehicleData.results)
+    const vehicles = cleanVehicles(allVehicles)
+    this.setState( { vehicles })
+  } catch (error) {
+    this.setState({errorStatus: error})
   }
-
-fetchSpecies = (people) => {
-  const unresolvedPromises = people.map( async (person) => {
-    if (person.species.length > 0) {
-      const response =  await fetch(person.species[0]);
-      const speciesData = await response.json();
-      return ({
-          name: person.name,
-          homeworld: person.homeworld,
-          population: person.population,
-          species: speciesData.name
-        })
-    } else {
-      return({
-        name: person.name,
-        homeworld: person.homeworld,
-        population: person.population,
-        species: 'unknown'
-      })
-    }
-  })
-  return Promise.all(unresolvedPromises)
 }
 
-fetchHomeworlds = (people) => {
-  const unresolvedPromises = people.map( async (person) => {
-      const response = await fetch(person.homeworld);
-      const homeworldData = await response.json();
-      return ({ 
-        ...person, 
-        homeworld: homeworldData.name,
-        population: homeworldData.population,
-      })
-  })
-  return Promise.all(unresolvedPromises)
+addPeople = async () => {
+  let allPeople = [];
+  const url = `https://swapi.co/api/people/`
+
+  try {
+    const peopleData = await fetchData(url);
+    allPeople.push(...peopleData.results)
+    const withHome = await addHomeworlds(allPeople);
+    const people = await addSpecies(withHome);
+    this.setState({ people })
+  } catch (error) {
+    this.setState({errorStatus: error})
+  }
 }
 
-//MOVIE FETCH
-fetchCrawl = async () => {
-  let index =  Math.floor(Math.random() * 6 + 1)
-  const url = 'https://swapi.co/api/films/';
-  const response = await fetch(url);
-  const result = await response.json();
-  const filmData = await result.results[index];
-
-  this.setState({
-    films: {
-      title: filmData.title,
-      crawl: filmData.opening_crawl,
-      year: filmData.release_date
-    }});
+addCrawl = async () => {
+  try {
+    const movie = await chooseRandomFilm();
+    this.setState({
+      films: {
+        title: movie.title,
+        crawl: movie.opening_crawl,
+        year: movie.release_date
+      }
+    });
+  } catch (error) {
+    this.setState({errorStatus: error})
+  }
 }
-
 
 componentDidMount = () =>  {
-  // this.fetchPeopleData();
-  // this.fetchCrawl();
-  this.fetchPlanetData();
+  this.addCrawl();
 }
 
   render() {
+    const { films, active, favorites } = this.state;
     return (
       <div className="App">
         <header>
-          <Controls />
+          <Controls
+            key={uid} 
+            updateActive={this.updateActive}
+            populateData={this.populateData}
+            favorites={favorites}
+            />
         </header>
         <main>
-          <MovieText films={this.state.films} />
-          <CardContainer />
+          <MovieText key={uid} films={films}/>
+          <CardContainer
+            key={uid} 
+            active={active}
+            category={this.state}
+            />
         </main>
       </div>
     );
