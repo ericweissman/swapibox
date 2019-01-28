@@ -27,20 +27,20 @@ class Controls extends Component {
     return(
       <nav>
         <h1>SWapiBox</h1>
-        {
-          buttons.map((button) => {
-            if (button !== 'favorites') {
-              return (
-                <button className={this.state.active === button ? "active" : "btn"} name={button} onClick={this.handleClick}>{button}</button>
-              )
-            } else {
-              return (
-                <button className={this.state.active === button ? "active" : "btn"} name={button} onClick={this.handleClick}>{button} {favorites.length}</button>
-              )
-            }
-            
+        <div className="btn-container">
+          {
+            buttons.map((button) => {
+              if (button !== 'favorites') {
+                return (
+                  <button className={this.state.active === button ? "btn active" : "btn"} name={button} onClick={this.handleClick}>{button}</button>
+                )
+              } else {
+                return (
+                  <button className={this.state.active === button ? "btn active" : "btn"} name={button} onClick={this.handleClick}>{button} {favorites.length}</button>
+              )}
           })
         }
+        </div>
       </nav>
     )
   }
