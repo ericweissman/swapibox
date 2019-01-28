@@ -19,13 +19,13 @@ const CardContainer = (props) => {
   } else if (active !== '' && category[active].length === 0) {
     return(
       <div className='card-container loading'>
-        <h1>Loading</h1>
+        <h2>Loading</h2>
       </div>
     )
   } else {
       return (
         <div className='card-container choose'>
-          <h1>CHOOSE A CATEGORY</h1>
+          <h2>chose a category, you must...</h2>
         </div>
       )}
   }
